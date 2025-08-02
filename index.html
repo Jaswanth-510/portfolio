@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASWANTH PEDALANKA | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Poppins:wght@400;600&display=swap');
+
+        :root {
+            --bg-color: #0A0D14;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-color: #D1D5DB;
+            --neon-blue: #00FFFF;
+            --neon-pink: #FF00FF;
+            --neon-green: #00FF00;
+            --text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+
+        /* Basic Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+            animation: starfield 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes starfield {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(0, -100%); }
+        }
+
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            box-shadow: 0 0 25px 5px var(--neon-blue);
+            transform: translateY(-5px);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .header.scrolled {
+            background-color: rgba(10, 13, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            text-shadow: var(--text-shadow);
+        }
+
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: var(--text-shadow);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 5% 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        #hero .glass-panel {
+            padding: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #hero h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            text-shadow: var(--text-shadow);
+            animation: text-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes text-glow {
+            from { text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue); }
+            to { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+        }
+
+        #hero h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            min-height: 2rem; /* Prevent layout shift */
+        }
+
+        #hero p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .btn-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border: 2px solid var(--neon-blue);
+            background: transparent;
+            transition: color 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin: 0 1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+        }
+
+        /* About Section */
+        #about .content-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            padding: 4rem;
+        }
+        
+        #about .profile-img {
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transition: all 0.5s ease;
+            filter: grayscale(80%) hue-rotate(180deg);
+        }
+
+        #about .profile-img:hover {
+            filter: grayscale(0%) hue-rotate(0deg);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        }
+
+        #about h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* Skills Section */
+        #skills .content-wrapper {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        #skills h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 3rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .skill-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .skill-card svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--text-color);
+            transition: fill 0.3s ease;
+        }
+        
+        .skill-card:hover svg {
+            fill: var(--neon-blue);
+        }
+
+        .skill-card p {
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .skill-card:hover p {
+            color: var(--neon-blue);
+        }
+
+        /* Projects Section */
+        #projects .content-wrapper {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        #projects h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 3rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .project-card {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 0 20px 5px var(--neon-pink);
+            border-color: var(--neon-pink);
+            transform: translateY(-10px);
+        }
+        
+        .project-card img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            color: var(--neon-blue);
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .tech-tags {
+            margin-top: 1rem;
+        }
+
+        .tech-tags span {
+            display: inline-block;
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--neon-blue);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Blog Section */
+        #blog .content-wrapper {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        #blog h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 3rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .blog-card {
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 0 20px 5px var(--neon-green);
+            border-color: var(--neon-green);
+            transform: translateY(-10px);
+        }
+        
+        .blog-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card .date {
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        
+        .blog-card p {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .read-more-btn {
+            margin-top: 1.5rem;
+            display: inline-block;
+            text-decoration: none;
+            color: var(--neon-green);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            transition: text-shadow 0.3s ease;
+        }
+        
+        .read-more-btn:hover {
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        /* Contact Section */
+        #contact .content-wrapper {
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        #contact h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 2rem;
+        }
+
+        #contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem 5%;
+                gap: 1rem;
+            }
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                margin: 0.5rem 1rem;
+            }
+            .section {
+                padding: 4rem 5% 2rem;
+            }
+            #hero .glass-panel {
+                padding: 2rem;
+            }
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero h2 {
+                font-size: 1.2rem;
+            }
+            #about .content-wrapper {
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+            }
+            .skills-grid, .projects-grid, .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#hero" class="logo">JASWANTH P.</a>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="section">
+            <div class="glass-panel">
+                <h1 class="animated-text">Hello, World! I'm **JASWANTH PEDALANKA**</h1>
+                <h2 class="typing-text"></h2>
+                <p>A Computer Science & Engineering student building impactful software solutions.</p>
+                <div class="btn-container">
+                    <a href="#projects" class="btn">Explore My Work</a>
+                    <a href="JASWANTH PEDALANKA_22FE1A05D2 (1).pdf" class="btn download-btn" download>Download Resume</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/yourusername"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jaswanth-pedalanka-179846326"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section">
+            <div class="glass-panel content-wrapper">
+                <img src="https://placehold.co/300x300/1A202C/D1D5DB?text=JASWANTH" alt="JASWANTH PEDALANKA" class="profile-img">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>Detail-oriented Computer Science and Engineering student skilled in full-stack development and problem-solving. Passionate about creating impactful software solutions and collaborating with diverse teams. Seeking growth-oriented roles to apply and expand my technical expertise.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="content-wrapper">
+                <h2>My Toolkit</h2>
+                <div class="skills-grid">
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Python</title><path d="M12.001 2.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-1.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 0-.5-.5zm-3 0a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 0 .5-.5v-.5a.5.5 0 0 0-.5-.5h-1.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 0-.5-.5zm6.5 0a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 1-.5.5h-1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5zm-4.5 12a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2.5a.5.5 0 0 0-.5-.5zm2.5 0a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 1-.5.5h-1.5a.5.5 0 0 0-.5.5v.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 0 .5-.5v-.5a.5.5 0 0 0-.5-.5zm-5 0a.5.5 0 0 0-.5.5v2.5a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-1.5a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-.5-.5zm1 1.5a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1-.5-.5h-1.5a.5.5 0 0 0-.5-.5v-.5a.5.5 0 0 0-.5-.5h-2.5a.5.5 0 0 0-.5.5zm-5.5 0a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 0 .5-.5v-2.5a.5.5 0 0 0-.5-.5h-1.5a.5.5 0 0 1-.5-.5v-.5a.5.5 0 0 0-.5-.5z"/></svg>
+                        <p>Python</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Java</title><path d="M2.57 2.45c-.32.06-.57.3-.61.64v3.13c.04.34.29.58.61.64.2.04 1.15.22 2.22.46l.46.1c1.3.28 2.58.55 3.82.72.63.09 1.18.15 1.57.17.48.02.82-.01.99-.1.21-.11.23-.21.23-.53V3.08c0-.32-.02-.42-.23-.53-.17-.09-.51-.12-.99-.1-.39.02-.94.08-1.57.17-1.24.17-2.52.44-3.82.72l-.46.1c-1.07.24-2.02.42-2.22.46zM22.02 12.33c.27-.08.47-.32.5-.59V8.65c0-.28-.2-.52-.5-.59-.2-.04-1.15-.22-2.22-.46l-.46-.1c-1.3-.28-2.58-.55-3.82-.72-.63-.09-1.18-.15-1.57-.17-.48-.02-.82.01-.99.1-.21.11-.23.21-.23.53v3.13c0 .32.02.42.23.53.17.09.51.12.99.1.39-.02.94-.08 1.57-.17 1.24-.17 2.52-.44 3.82-.72l.46-.1c1.07-.24 2.02-.42 2.22-.46zM15.53 10.74c.24.08.4.28.43.53v3.13c-.03.25-.19.45-.43.53-.2.04-.68.12-1.42.22-.74.1-1.3.15-1.74.17-.5.02-.85-.01-1.03-.1-.21-.11-.23-.21-.23-.53v-3.13c0-.32.02-.42.23-.53.18-.09.53-.12 1.03-.1.44.02 1.0.07 1.74.17.74.1 1.22.18 1.42.22zM21.75 16.5c.32.06.57.3.61.64v3.13c-.04.34-.29.58-.61.64-.2.04-1.15.22-2.22.46l-.46.1c-1.3.28-2.58.55-3.82.72-.63.09-1.18.15-1.57.17-.48.02-.82-.01-.99-.1-.21-.11-.23-.21-.23-.53v-3.13c0-.32.02-.42.23-.53.17-.09.51-.12.99-.1.39.02.94.08 1.57.17 1.24.17 2.52.44 3.82.72l.46.1c1.07.24 2.02.42 2.22.46zM8.38 18.09c.24.08.4.28.43.53v3.13c-.03.25-.19.45-.43.53-.2.04-.68.12-1.42.22-.74.1-1.3.15-1.74.17-.5.02-.85-.01-1.03-.1-.21-.11-.23-.21-.23-.53v-3.13c0-.32.02-.42.23-.53.18-.09.53-.12 1.03-.1.44.02 1.0.07 1.74.17.74.1 1.22.18 1.42.22zM2.57 16.5c-.32.06-.57.3-.61.64v3.13c.04.34.29.58.61.64.2.04 1.15.22 2.22.46l.46.1c1.3.28 2.58.55 3.82.72.63.09 1.18.15 1.57.17.48.02.82-.01.99-.1.21-.11.23-.21.23-.53v-3.13c0-.32-.02-.42-.23-.53-.17-.09-.51-.12-.99-.1-.39.02-.94.08-1.57.17-1.24.17-2.52.44-3.82.72l-.46.1c-1.07.24-2.02.42-2.22.46zM2.25 8.06c.24.08.4.28.43.53v3.13c-.03.25-.19.45-.43.53-.2.04-.68.12-1.42.22-.74.1-1.3.15-1.74.17-.5.02-.85-.01-1.03-.1-.21-.11-.23-.21-.23-.53V8.59c0-.32.02-.42.23-.53.18-.09.53-.12 1.03-.1.44.02 1.0.07 1.74.17.74.1 1.22.18 1.42.22z"/></svg>
+                        <p>Java</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>JavaScript</title><path d="M0 0h24v24H0V0zm22.035 11.232c-.08-.344-.338-.727-.723-.727h-2.126c-.386 0-.616.27-.723.633l-1.056 2.805-1.528-2.805c-.107-.363-.337-.633-.722-.633H12.22c-.413 0-.69.308-.57.653l2.84 4.887-2.903 4.908c-.108.345.17.653.57.653h2.126c.385 0 .633-.284.722-.647l1.45-2.617 1.45 2.617c.088.363.337.647.722.647h2.127c.413 0 .69-.308.57-.653l-2.904-4.908 2.841-4.887c.107-.345-.17-.653-.57-.653zm-10.22 0c-.385 0-.616.27-.723.633l-1.637 4.092-1.637-4.092c-.088-.363-.337-.633-.722-.633h-2.126c-.413 0-.69.308-.57.653l3.053 6.07c.214.413.568.616.993.616.425 0 .779-.203.992-.616l3.054-6.07c.107-.345-.17-.653-.57-.653z"/></svg>
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M0 0v24h24V0H0zm23.606 18.064l-2.072 2.37-6.05-6.843 6.05-6.843 2.072 2.37-.307.348-.752-.85-.145-.164-.002.002-4.148 4.707 4.148 4.707.002.002.145-.164.752-.85.307.348zM2.072 2.37l-2.072 2.37.307.348.752-.85.145-.164.002.002 4.148 4.707-4.148 4.707-.002.002-.145-.164-.752-.85-.307.348 2.072 2.37.307.348 6.05-6.843-6.05-6.843-2.37-.307.348z"/></svg>
+                        <p>HTML/CSS</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>MySQL</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>MySQL</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VS Code</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>VS Code</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>OOP</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>OOP</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Data Structures</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>Data Structures</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>APIs</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>APIs</p>
+                    </div>
+                    <div class="skill-card glass-panel">
+                        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Problem Solving</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                        <p>Problem Solving</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="content-wrapper">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card glass-panel">
+                        <img src="https://placehold.co/600x400/1A202C/D1D5DB?text=Voice+Assistant" alt="Voice Assistant Project Screenshot">
+                        <h3>Voice Assistant (Python + ChatGPT)</h3>
+                        <p>A smart home voice control system with weather and news updates, improving automation efficiency by 40%.</p>
+                        <div class="tech-tags">
+                            <span>Python</span>
+                            <span>ChatGPT API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-panel">
+                        <img src="https://placehold.co/600x400/1A202C/D1D5DB?text=Hospital+Locator" alt="Hospital Locator Project Screenshot">
+                        <h3>Hospital Locator (Web + Google Maps API)</h3>
+                        <p>A real-time map-based hospital search application that achieved 95% accuracy in location matching.</p>
+                        <div class="tech-tags">
+                            <span>Web</span>
+                            <span>Google Maps API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-panel">
+                        <img src="https://placehold.co/600x400/1A202C/D1D5DB?text=Weather+App" alt="Weather Forecast App Screenshot">
+                        <h3>Weather Forecast App</h3>
+                        <p>Provides real-time weather updates using a Weather API, which reduced page load time by 25%.</p>
+                        <div class="tech-tags">
+                            <span>Web</span>
+                            <span>Weather API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                    <div class="project-card glass-panel">
+                        <img src="https://placehold.co/600x400/1A202C/D1D5DB?text=Currency+Converter" alt="Currency Converter App Screenshot">
+                        <h3>Currency Converter (API-based)</h3>
+                        <p>A multi-currency conversion tool that provides real-time conversion and an enabled conversion with a 20% faster response.</p>
+                        <div class="tech-tags">
+                            <span>API-based</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn">Live Demo</a>
+                            <a href="#" class="btn">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="content-wrapper">
+                <h2>Latest Posts</h2>
+                <div class="blog-grid">
+                    <div class="blog-card glass-panel">
+                        <h3>My Journey with Python for Data Science</h3>
+                        <p class="date">October 26, 2025</p>
+                        <p>A deep dive into the NPTEL certification and the skills I acquired using Python libraries like Pandas and NumPy...</p>
+                        <a href="#" class="read-more-btn">Read Full Post &raquo;</a>
+                    </div>
+                    <div class="blog-card glass-panel">
+                        <h3>Problem-Solving with Data Structures</h3>
+                        <p class="date">October 19, 2025</p>
+                        <p>An article discussing the importance of Data Structures and how it has helped me in building efficient solutions...</p>
+                        <a href="#" class="read-more-btn">Read Full Post &raquo;</a>
+                    </div>
+                    <div class="blog-card glass-panel">
+                        <h3>My Experience at a 24-Hour Hackathon</h3>
+                        <p class="date">October 12, 2025</p>
+                        <p>A reflection on teamwork, problem-solving under pressure, and the innovative project we built during the event...</p>
+                        <a href="#" class="read-more-btn">Read Full Post &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="glass-panel content-wrapper">
+                <h2>Let's Connect</h2>
+                <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <form class="contact-form" action="#">
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <textarea id="message" name="message" placeholder="Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                <div class="social-links" style="margin-top: 2rem;">
+                    <a href="https://github.com/yourusername"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jaswanth-pedalanka-179846326"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/yourusername"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:pjaswanth510@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Typing effect for the hero subtitle
+        const typingElement = document.querySelector('.typing-text');
+        const titles = ["Full-Stack Developer", "Front-End Engineer", "Problem-Solver", "Innovator"];
+        let titleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentTitle = titles[titleIndex];
+            const displayChar = isDeleting ? currentTitle.substring(0, charIndex--) : currentTitle.substring(0, charIndex++);
+            typingElement.textContent = displayChar;
+
+            let typingSpeed = isDeleting ? 75 : 150;
+
+            if (!isDeleting && charIndex === currentTitle.length + 1) {
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === -1) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                typingSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+        
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 // Trigger when 20% of the section is visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Initial call for the typing effect
+        document.addEventListener("DOMContentLoaded", () => {
+            typeEffect();
+        });
+    </script>
+</body>
+</html>
